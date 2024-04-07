@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use Cfw\Http\Response;
 use Cfw\Html\Page;
+use Cfw\Database\Transaction;
+use Cfw\Database\Database;
 
 class FrontendController
 {
@@ -27,6 +29,12 @@ class FrontendController
 
     public function contact(): void
     {
+        /* $query = 'SELECT * FROM users';
+        $transaction = new Transaction(new Database());
+        $transaction->begin();
+        $stmt = $transaction->query($query);
+        $users = $stmt->fetchAll();
+        dd($users); */
         $this->response->setContent(Page::render('contact'));
 
         $this->response->send();
