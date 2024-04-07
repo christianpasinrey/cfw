@@ -21,10 +21,11 @@ class FrontendController
         $this->response->send();
     }
 
-    public function about(): void
+    public function about(): string /* void */
     {
-        $this->response->setContent(Page::render('about'));
-        $this->response->send();
+        /* $this->response->setContent(Page::render('about'));
+        $this->response->send(); */
+        return Page::render('about');
     }
 
     public function contact(): void
