@@ -18,10 +18,13 @@ class Router
         $params = $request->params;
         $body = $request->body;
 
-        $uri_decoded = rawurldecode($uri);
+        //$uri decoded is the uri without the query string
+        $uri_decoded = explode('?', $uri)[0];
 
         $routeInfo = $dispatcher->dispatch($request->method, $uri_decoded);
-
+        if ($routeInfo[0] === \FastRoute\Dispatcher::NOT_FOUND) {
+            dd($request->method, $uri);
+        }
         switch ($routeInfo[0]) {
             case \FastRoute\Dispatcher::NOT_FOUND:
                 echo '404 - Not Found';
