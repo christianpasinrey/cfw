@@ -17,16 +17,24 @@ class FrontendController
 
     public function index(): void
     {
-        $this->response->setContent(Page::render('index', ['title' => 'Home']));
+        $this->response->setContent(
+            Page::render(
+                'index',
+                ['title' => 'Home']
+            )
+        );
         $this->response->send();
     }
 
-    public function about(): string /* void */
+    public function about(): void
     {
-        /* $this->response->setContent(Page::render('about'));
-        $this->response->send(); */
-        $title = 'About Us';
-        return Page::render('about', compact('title'));
+        $this->response->setContent(
+            Page::render(
+                'about',
+                ['title' => 'About Us']
+            )
+        );
+        $this->response->send();
     }
 
     public function contact(): void
@@ -37,8 +45,12 @@ class FrontendController
         $stmt = $transaction->query($query);
         $users = $stmt->fetchAll();
         dd($users); */
-        $this->response->setContent(Page::render('contact', ['title' => 'Contact Us']));
-
+        $this->response->setContent(
+            Page::render(
+                'contact',
+                ['title' => 'Contact Us']
+            )
+        );
         $this->response->send();
     }
 }

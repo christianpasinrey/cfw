@@ -32,7 +32,7 @@ class Page
             require_once $file;
         } else {
             echo "
-            <div style='display:grid;place-items:center;height:100vh;'>
+            <div style='display:grid;place-items:center;height:100dvh;'>
                 <h1 style='color:red;text-align:center'>The html cannot be found, please check the file name<br/> '$file'</h1>
             </div>";
         }
