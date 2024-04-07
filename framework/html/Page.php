@@ -23,10 +23,12 @@ class Page
      * @param string $page_name
      * @return string
      */
-    public static function render(string $page_name): string
+    public static function render(string $page_name, array $variables): string
     {
         $file = self::getDir() . $page_name . '.html';
         if (file_exists($file)) {
+            ob_start();
+            extract($variables);
             require_once $file;
         } else {
             echo "
