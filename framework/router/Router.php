@@ -13,11 +13,11 @@ class Router
         $dispatcher = \FastRoute\simpleDispatcher(function (RouteCollector $r) {
             require_once __DIR__ . '/../../src/routes/web.php';
         });
+
         $uri = $request->uri;
-        // Strip query string (?foo=bar) and decode URI
-        if (false !== $pos = strpos($request->uri, '?')) {
-            $uri = substr($request->uri, 0, $pos);
-        }
+        $params = $request->params;
+        $body = $request->body;
+
         $uri_decoded = rawurldecode($uri);
 
         $routeInfo = $dispatcher->dispatch($request->method, $uri_decoded);
@@ -34,7 +34,7 @@ class Router
                 $vars = implode(',', $routeInfo[2]);
                 [$controller, $method] = explode('@', $handler);
                 $controller = new $controller;
-                if (!empty($request->params)) {
+                if (!empty($params) ||  !empty($body)) {
                     $controller->$method($request);
                     break;
                 }

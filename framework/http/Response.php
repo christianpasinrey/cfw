@@ -11,7 +11,7 @@ class Response
     ) {
     }
 
-    public function setContent(string $content): void
+    public function setContent(string|callable $content): void
     {
         $this->content = $content;
     }
