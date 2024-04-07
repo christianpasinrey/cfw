@@ -1,0 +1,44 @@
+services:
+  #server
+  web:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./public:/var/www/web
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - local
+  #database
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: vfw
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    networks:
+      - local
+  #php
+  php:
+    image: php:8.2-fpm
+    volumes:
+      - ./:/var/www/web
+    networks:
+      - local
+  #phpmyadmin
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+    ports:
+      - "8080:80"
+    networks:
+      - local
+#networks
+networks:
+  local:
+    driver: bridge
