@@ -12,7 +12,7 @@
     <script>
         let user=null;
         document.addEventListener('DOMContentLoaded',function() {
-            fetch('search?name=Christian&email=c@email.com')
+            fetch('search?name=John&email=john.doe@example.net')
                 .then(response => response.json())
                 .then((data) => {
                     user=data;
